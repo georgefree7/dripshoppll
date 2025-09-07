@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Katalog - DripShop</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="stars"></div>
+  <div class="stars2"></div>
+  <div class="stars3"></div>
+
+  <header>
+    <h1>
+      <a href="index.html">
+        <img src="images/logoo.png" alt="DripShop" class="logo">
+      </a>
+    </h1>
+    <nav>
+      <a href="index.html">Strona Główna</a>
+      <a href="catalog.html" class="active">Katalog</a>
+      <a href="about.html">O Nas</a>
+      <a href="contact.html">Kontakt</a>
+    </nav>
+    <a href="cart.html" class="cart">🛒 Koszyk (<span id="cart-count">0</span>)</a>
+  </header>
+
+  <main class="catalog-layout">
+    <!-- ЛЕВАЯ ПАНЕЛЬ (ФИЛЬТРЫ) -->
+    <aside class="filters">
+      <h3>Filtry</h3>
+      <ul>
+        <li><button onclick="filterProducts('all')">Wszystko</button></li>
+        <li><button onclick="filterProducts('bluza')">Bluzy</button></li>
+        <li><button onclick="filterProducts('buty')">Buty</button></li>
+        <li><button onclick="filterProducts('torebka')">Torebki</button></li>
+        <li><button onclick="filterProducts('akcesoria')">Akcesoria</button></li>
+        <li><button onclick="filterProducts('spodnie')">Spodnie</button></li>
+      </ul>
+    </aside>
+
+    <!-- СПРАВА ТОВАРЫ -->
+    <section class="products-grid">
+      <!-- Bluzy -->
+      <div class="product-card bluza" onclick="openProduct('techblack')">
+        <img src="images/techblack.jpg" alt="Bluza Nike Tech Fleece Czarny">
+        <h3>Bluza Nike Tech Fleece – Czarny-szary</h3>
+        <span class="price">299 PLN / 75 USD</span>
+      </div>
+
+      <div class="product-card bluza" onclick="openProduct('techwhite')">
+        <img src="images/techwhite.jpg" alt="Bluza Nike Tech Fleece Biały">
+        <h3>Bluza Nike Tech Fleece – Biały</h3>
+        <span class="price">299 PLN / 75 USD</span>
+      </div>
+
+      <div class="product-card bluza" onclick="openProduct('ston')">
+        <img src="images/ston.jpg" alt="Stone Island Hoodie">
+        <h3>Stone Island Hoodie – Czarny z dwoma naszywkami</h3>
+        <span class="price">499 PLN / 125 USD</span>
+      </div>
+
+      <div class="product-card bluza" onclick="openProduct('black1')">
+        <img src="images/spiderblack.jpg" alt="black1">
+        <h3>SP5DER BLACK</h3>
+        <span class="price">1200 PLN / 300 USD</span>
+      </div>
+
+
+      <!-- Torebki -->
+      <div class="product-card torebka" onclick="openProduct('guess')">
+        <img src="images/guess.jpg" alt="Guess Męska Saszetka">
+        <h3>Guess Męska Saszetka – Styl i Wygoda</h3>
+        <span class="price">199 PLN / 50 USD</span>
+      </div>
+
+      <div class="product-card torebka" onclick="openProduct('kors')">
+        <img src="images/michaelkors.jpg" alt="Michael Kors Torebka">
+        <h3>Michael Kors – Torebka damska</h3>
+        <span class="price">599 PLN / 150 USD</span>
+      </div>
+
+      <div class="product-card torebka" onclick="openProduct('lvbag')">
+        <img src="images/lvbag.jpg" alt="Louis Vuitton">
+        <h3>Louis Vuitton – Torebka Męska</h3>
+        <span class="price">4000 PLN / 1000 USD</span>
+      </div>
+
+      <!-- Buty -->
+      <div class="product-card buty" onclick="openProduct('tn')">
+        <img src="images/tn.jpg" alt="Nike TN Spider-Man">
+        <h3>Nike TN – Edycja Spider-Man</h3>
+        <span class="price">399 PLN / 100 USD</span>
+      </div>
+
+      <div class="product-card buty" onclick="openProduct('track')">
+        <img src="images/track.jpg" alt="track">
+        <h3>Balenciaga Track</h3>
+        <span class="price">3200 PLN / 800 USD</span>
+      </div>
+
+      <div class="product-card buty" onclick="openProduct('lan')">
+        <img src="images/lan.jpg" alt="lan">
+        <h3>LANVIN Sneakers – White Multicolor Laces</h3>
+        <span class="price">2000 PLN / 500 USD</span>
+      </div>
+
+      <div class="product-card buty" onclick="openProduct('amiributy')">
+        <img src="images/amiributy.jpg" alt="amiributy">
+        <h3>AMIRI Buty</h3>
+        <span class="price">4000 PLN / 1000 USD</span>
+      </div>
+
+      <!-- Akcesoria -->
+      <div class="product-card akcesoria" onclick="openProduct('hugoboss')">
+        <img src="images/hugoboss.jpg" alt="Termos Hugo Boss">
+        <h3>Termos Hugo Boss</h3>
+        <span class="price">149 PLN / 38 USD</span>
+      </div> 
+
+      <div class="product-card akcesoria" onclick="openProduct('lvbelt')">
+        <img src="images/lv.jpg" alt="LV Belt">
+        <h3>Louis Vuitton</h3>
+        <span class="price">2000 PLN / 500 USD</span>
+      </div> 
+
+      <!-- Spodnie -->
+      <div class="product-card spodnie" onclick="openProduct('nikepants')">
+        <img src="images/nikepants.jpg" alt="Nike Tech Fleece Spodnie">
+        <h3>Spodnie Nike Tech Fleece – Czarny</h3>
+        <span class="price">349 PLN / 88 USD</span>
+      </div>
+
+      <div class="product-card spodnie" onclick="openProduct('amiri')">
+        <img src="images/amiri.jpg" alt="amiri">
+        <h3>AMIRI Jeans</h3>
+        <span class="price">2500 PLN / 650 USD</span>
+      </div>
+
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2025 DripShop. Wszystkie prawa zastrzeżone.</p>
+    <p>
+      <a href="https://www.instagram.com/joraantisocial7/" class="social">Instagram</a> |
+      <a href="#" class="social">TikTok</a> |
+      <a href="#" class="social">Telegram</a>
+    </p>
+  </footer>
+
+  <script>
+    // Переход на страницу товара
+    function openProduct(productId) {
+      window.location.href = `product.html?product=${productId}`;
+    }
+
+    // Фильтрация товаров
+    function filterProducts(category) {
+      const products = document.querySelectorAll('.product-card');
+      products.forEach(product => {
+        if (category === 'all') {
+          product.style.display = 'block';
+        } else {
+          if (product.classList.contains(category)) {
+            product.style.display = 'block';
+          } else {
+            product.style.display = 'none';
+          }
+        }
+      });
+    }
+  </script>
+</body>
+</html>

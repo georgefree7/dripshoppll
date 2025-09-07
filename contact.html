@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kontakt - DripShop</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="stars"></div>
+  <div class="stars2"></div>
+  <div class="stars3"></div>
+
+  <header>
+    <h1>
+      <a href="index.html">
+        <img src="images/logoo.png" alt="DripShop" class="logo">
+      </a>
+    </h1>
+    <nav>
+      <a href="index.html">Strona Główna</a>
+      <a href="catalog.html">Katalog</a>
+      <a href="about.html">O Nas</a>
+      <a href="contact.html" class="active">Kontakt</a>
+    </nav>
+    <a href="cart.html" class="cart">🛒 Koszyk (<span id="cart-count">0</span>)</a>
+  </header>
+
+  <main class="page-content">
+    <h2>📩 Skontaktuj się z nami</h2>
+    <p>Masz pytania? Potrzebujesz pomocy przy zamówieniu? Napisz do nas!</p>
+
+    <form class="contact-form">
+      <label for="name">Imię i nazwisko</label>
+      <input type="text" id="name" placeholder="Twoje imię..." required>
+
+      <label for="telegram">Twój Telegram</label>
+      <input type="text" id="telegram" placeholder="@TwójUsername" required>
+
+      <label for="message">Wiadomość</label>
+      <textarea id="message" rows="5" placeholder="Napisz coś..." required></textarea>
+
+      <button type="submit">Wyślij</button>
+    </form>
+  </main>
+
+  <footer>
+    <p>© 2025 DripShop. Wszystkie prawa zastrzeżone.</p>
+    <p>
+      <a href="https://www.instagram.com/joraantisocial7/" class="social">Instagram</a> |
+      <a href="#" class="social">TikTok</a> |
+      <a href="#" class="social">Telegram</a>
+    </p>
+  </footer>
+
+  <!-- Встроенный скрипт для Telegram -->
+  <script>
+    const botToken = "8413431063:AAGSCicIzFxjetQDqC-26wAftVSUZQKmF4s";
+    const chatId = "7572173621";
+
+    document.querySelector(".contact-form").addEventListener("submit", function(e) {
+      e.preventDefault();
+
+      const name = document.getElementById("name").value;
+      const telegram = document.getElementById("telegram").value;
+      const message = document.getElementById("message").value;
+
+      const text = `📩 Nowa wiadomość ze strony DripShop:\n\n👤 Imię: ${name}\n📧 Telegram: ${telegram}\n💬 Wiadomość: ${message}`;
+
+      fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({chat_id: chatId, text: text})
+      })
+      .then(res => res.json())
+      .then(data => {
+        if(data.ok) {
+          alert("✅ Wiadomość została wysłana!");
+          document.querySelector(".contact-form").reset();
+        } else {
+          alert("❌ Błąd podczas wysyłania. Sprawdź konsolę.");
+          console.log(data);
+        }
+      })
+      .catch(err => {
+        alert("⚠️ Błąd połączenia z Telegram API. Sprawdź konsolę.");
+        console.error(err);
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Zamówienie - DripShop</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="stars"></div>
+  <div class="stars2"></div>
+  <div class="stars3"></div>
+
+  <header>
+    <h1>
+      <a href="index.html">
+        <img src="images/logoo.png" alt="DripShop" class="logo">
+      </a>
+    </h1>
+    <nav>
+      <a href="index.html">Strona Główna</a>
+      <a href="catalog.html">Katalog</a>
+      <a href="about.html">O Nas</a>
+      <a href="contact.html">Kontakt</a>
+    </nav>
+    <a href="cart.html" class="cart">🛒 Koszyk (<span id="cart-count">0</span>)</a>
+  </header>
+
+  <main>
+    <h2>📝 Formularz Zamówienia</h2>
+
+    <form class="order-form" id="orderForm">
+      <label for="name">Imię i Nazwisko:</label>
+      <input type="text" id="name" name="name" required>
+
+      <label for="phone">Telefon:</label>
+      <input type="text" id="phone" name="phone" required>
+
+      <label for="address">Adres dostawy:</label>
+      <textarea id="address" name="address" required></textarea>
+
+      <label for="comment">Komentarz do zamówienia:</label>
+      <textarea id="comment" name="comment"></textarea>
+
+      <button type="submit">📩 Złóż zamówienie</button>
+    </form>
+  </main>
+
+  <footer>
+    <p>© 2025 DripShop. Wszystkie prawa zastrzeżone.</p>
+    <p>
+      <a href="https://www.instagram.com/joraantisocial7/" class="social">Instagram</a> |
+      <a href="#" class="social">TikTok</a> |
+      <a href="#" class="social">Telegram</a>
+    </p>
+  </footer>
+
+  <script>
+    document.getElementById("orderForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+
+      const name = document.getElementById("name").value;
+      const phone = document.getElementById("phone").value;
+      const address = document.getElementById("address").value;
+      const comment = document.getElementById("comment").value;
+
+      // достаём корзину из localStorage
+      const cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+      // формируем список товаров
+      let productList = "";
+      if (cart.length > 0) {
+        cart.forEach((item, index) => {
+          productList += `${index + 1}. ${item.title} - ${item.price}\n`;
+        });
+      } else {
+        productList = "❌ Koszyk jest pusty";
+      }
+
+      const message = `
+🛒 Nowe zamówienie w DripShop:
+👤 Imię i nazwisko: ${name}
+📞 Telefon: ${phone}
+📍 Adres: ${address}
+💬 Komentarz: ${comment}
+
+📦 Zamówione produkty:
+${productList}
+`;
+
+      const token = "8413431063:AAGSCicIzFxjetQDqC-26wAftVSUZQKmF4s";
+      const chatId = "7572173621";
+      const url = `https://api.telegram.org/bot${token}/sendMessage`;
+
+      fetch(url, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          chat_id: chatId,
+          text: message,
+          parse_mode: "HTML"
+        })
+      })
+      .then(res => res.json())
+      .then(data => {
+        alert("✅ Zamówienie zostało wysłane! Skontaktujemy się z Tobą wkrótce.");
+        document.getElementById("orderForm").reset();
+        localStorage.removeItem("cart"); // очищаем корзину
+      })
+      .catch(err => {
+        alert("❌ Błąd wysyłania wiadomości, spróbuj ponownie.");
+        console.error(err);
+      });
+    });
+  </script>
+</body>
+</html>
